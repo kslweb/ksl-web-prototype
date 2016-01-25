@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block content %}
+        {% include 'header.html' %}
+        <div class="wrapper section-inner">
+            <div class="content full-width">
+                <div class="posts">
+                    <div class="post-20 post type-post status-publish format-standard has-post-thumbnail sticky hentry category-lifestyle category-personal category-work tag-beverages tag-coffee tag-developers" id="post-20">
+                        <div class="post-header">
+                            <h2 class="post-title"><a href="{{ post.id }}" rel="bookmark">{{ contactus.title }}</a></h2>
+                            <div class="post-meta"> <span class="post-date">{{ detail.created }}</span></div>
+                        </div>
+                        <!-- /post-header -->
+                        <div class="post-content">
+                            <p>{% autoescape off  %} {{ aboutus.description | linebreaks }} {% endautoescape %}</p>
+                        </div>
+                        <!-- /post-content -->
+
+                        <div class="clear"></div>
+                    <!-- /post -->
+                    </div>
+                </div>
+                <!-- /posts -->
+                <!-- /post-nav archive-nav -->
+            </div>
+            <!-- /content.left -->
+        </div>
+            {% include 'footer.html' %}
+    </div>
+    </div>
+    <!-- /big-wrapper -->
+
+{% endblock %}

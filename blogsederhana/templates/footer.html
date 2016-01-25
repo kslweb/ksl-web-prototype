@@ -1,0 +1,64 @@
+{% block content %}
+{% load blog_tags %}
+<!-- /footer-b -->
+<div class="footer section large-padding bg-dark">
+            <div class="footer-inner section-inner">
+                <div class="column column-1 left">
+                    <div class="widgets">
+                        <div class="widget widget_text">
+                            <div class="widget-content">
+                                <h3 class="widget-title">Supported By</h3>
+                                <div class="textwidget">
+                                    
+                                </div>
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                    </div>
+                </div>
+                <!-- /footer-a -->
+                <div class="column column-2 left">
+                    <div class="widgets">
+                        <div class="widget widget_recent_entries">
+                            <div class="widget-content">
+                                <h3 class="widget-title">Recent Posts</h3>
+                                <ul>
+                                    {% latest_post as recent_post %}
+                                    {% for id, title in recent_post.iteritems %}
+                                        <li><a href="/blog/{{ id }}">{{ title }}</a></li>
+                                    {% endfor %} 
+                                </ul>
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                    </div>
+                    <!-- /widgets -->
+                </div>
+                <div class="column column-3 left">
+                    <div class="widgets">
+                        <div class="widget hemingway_video_widget">
+                            <div class="widget-content">
+                                <h3 class="widget-title">Location</h3>
+                                <script src='https://maps.googleapis.com/maps/api/js?v=3.exp'></script><div style='overflow:hidden;height:329px;width:352px;'><div id='gmap_canvas' style='height:329px;width:352px;'></div><style>#gmap_canvas img{max-width:none!important;background:none!important}</style></div> <script type='text/javascript'>function init_map(){var myOptions = {zoom:12,center:new google.maps.LatLng(-8.6731395,115.22665789999996),mapTypeId: google.maps.MapTypeId.ROADMAP};map = new google.maps.Map(document.getElementById('gmap_canvas'), myOptions);marker = new google.maps.Marker({map: map,position: new google.maps.LatLng(-8.6731395,115.22665789999996)});infowindow = new google.maps.InfoWindow({content:'<strong>STIKOM Bali Lab IT Security / Forensic Lt. 4</strong><br>Jl. Raya Puputan No.86<br>80234 Denpasar<br>'});google.maps.event.addListener(marker, 'click', function(){infowindow.open(map,marker);});infowindow.open(map,marker);}google.maps.event.addDomListener(window, 'load', init_map);</script>
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                    </div>
+                    <!-- /widgets -->
+                </div>
+                <!-- /footer-c -->
+                <div class="clear"></div>
+            </div>
+            <!-- /footer-inner -->
+        </div>
+        <!-- /footer -->
+        <div class="credits section bg-dark no-padding">
+            <div class="credits-inner section-inner">
+                <p class="credits-left"> © 2016 <a href="/blog" title="Kelompok Study Linux">Kelompok Study Linux</a> </p>
+                <p class="credits-right"> <span>Theme by <a href="http://www.andersnoren.se/">Anders Noren</a></span> — <a title="To the top" class="tothetop">Up ↑</a> </p>
+                <div class="clear"></div>
+            </div>
+            <!-- /credits-inner -->
+        </div>
+        <!-- /credits -->
+{% endblock %}

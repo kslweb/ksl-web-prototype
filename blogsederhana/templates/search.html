@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+
+{% block content %}
+        {% include 'header.html' %}
+        <div class="wrapper section-inner">
+            <div class="content left">
+                <div class="posts">
+                	{% for result in results %}
+                	<div class="post-20 post type-post status-publish format-standard has-post-thumbnail sticky hentry category-lifestyle category-personal category-work tag-beverages tag-coffee tag-developers" id="post-20">
+                        <div class="post-header">
+                            <div class="featured-media"> <span class="sticky-post">{{ result.title }}</span>
+                                <a href="#"> 
+                                    {% if result.picture %}
+                                        <div id="custom_image"><img src="{{ result.picture.url }}" class="attachment-post-image wp-post-image" alt="Text"></div>
+                                    {% endif %}
+                                </a>
+                            </div>
+                            <!-- /featured-media -->
+                            <h2 class="post-title"><a href="{{ post.id }}" rel="bookmark">{{ result.title }}</a></h2>
+                            <div class="post-meta"> 
+                                <span class="post-date">{{ result.created }}</span>
+                                <span class="date-sep"> / </span>
+                                <span class="post-author">{{ author.username }}</span> 
+                            </div>
+                        </div>
+                        <!-- /post-header -->
+                        <div class="post-content">
+                            <p>{% autoescape off  %} {{ result.body | slice:":250" }} ... {{ linebreaks }} {% endautoescape %}</p>
+                            <p>Tag: 
+                            {% for tag in result.tags.all %}
+									<a href="/blog/tag/{{ tag }}">{{ tag }}</a>
+									{% if not forloop.last %}, {% endif %}
+							{% endfor %}</p>
+                            <p> <a href="/blog/{{ result.id }}" class="more-link">Continue reading</a>
+                            </p>
+                        </div>
+                        <!-- /post-content -->
+
+                        <div class="clear"></div>
+                    <!-- /post -->
+                    <!-- pagination -->
+                    {% if pages.has_next and pages.has_previous %}
+                        <div class="post-nav archive-nav"> 
+                            <a href="?page={{ pages.next_page_number }}" class="post-nav-newer">Older<span> posts »</span></a>
+                            <a href="?page={{ pages.previous_page_number }}" class="post-nav-older">« Newer<span> posts</span></a>
+                            <div class="clear"></div>
+                        </div>
+                    {% elif pages.has_next %}
+                        <div class="post-nav archive-nav"> 
+                            <a href="?page={{ pages.next_page_number }}" class="post-nav-newer">Older<span> posts »</span></a>
+                            <div class="clear"></div>
+                        </div>
+                    {% elif pages.has_previous %}
+                        <div class="post-nav archive-nav"> 
+                            <a href="?page={{ pages.previous_page_number }}" class="post-nav-older">« Newer<span> posts</span></a>
+                            <div class="clear"></div>
+                        </div>
+                    {% endif %}
+                    <!-- end pagination -->
+                    </div>
+                    {% endfor %}
+                </div>
+                <!-- /posts -->
+                <!-- /post-nav archive-nav -->
+            </div>
+            <!-- /content.left -->
+            {% include 'sidebar.html' %}
+            {% include 'footer.html' %}
+    </div>
+    <!-- /big-wrapper -->
+
+{% endblock %}

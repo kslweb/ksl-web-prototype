@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    {% if detail.publish == True %}
+        {% include 'header.html' %}
+        <div class="wrapper section-inner">
+            <div class="content left">
+                <div class="posts">
+                	<div class="post-20 post type-post status-publish format-standard has-post-thumbnail sticky hentry category-lifestyle category-personal category-work tag-beverages tag-coffee tag-developers" id="post-20">
+                        <div class="post-header">
+                            <div class="featured-media"> <span class="sticky-post">{{ detail.title }}</span>
+                                <a href="#"> 
+                                    {% if detail.picture %}
+                                        <div id="custom_image"><img src="{{ detail.picture.url }}" class="attachment-post-image wp-post-image" alt="Text"></div>
+                                    {% endif %}
+                                </a>
+                            </div>
+                            <!-- /featured-media -->
+                            <h2 class="post-title"><a href="{{ post.id }}" rel="bookmark">{{ detail.title }}</a></h2>
+                            <div class="post-meta"> 
+                                <span class="post-date">{{ detail.created }}</span>
+                                <div class="a2a_kit a2a_kit_size_32 a2a_default_style">
+                                <a class="a2a_button_facebook"></a>
+                                <a class="a2a_button_twitter"></a>
+                                <a class="a2a_button_google_plus"></a>
+                                </div>
+                                <script type="text/javascript" src="//static.addtoany.com/menu/page.js"></script>
+                            </div>
+                        </div>
+                        <!-- /post-header -->
+                        <div class="post-content">
+                            <p>{% autoescape off  %} {{ detail.body | linebreaks }} {% endautoescape %}</p>
+                            <p>Tag: 
+                            {% for tag in detail.tags.all %}
+									<a href="/blog/tag/{{ tag }}">{{ tag }}</a>
+									{% if not forloop.last %}, {% endif %}
+							{% endfor %}</p>
+                        </div>
+                        <!-- /post-content -->
+
+                        <div class="clear"></div>
+                    <!-- /post -->
+                    </div>
+                </div>
+                <!-- /posts -->
+             	<div id="disqus_thread"></div>
+				<script>
+					/**
+					*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+					*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
+					*/
+					
+					var disqus_config = function () {
+						this.page.url = 'http://localhost:8000/blog/{{ detail.id }}';  // Replace PAGE_URL with your page's canonical URL variable
+						this.page.identifier = '{{ detail.id }}'; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+					};
+					 
+					(function() {  // DON'T EDIT BELOW THIS LINE
+						var d = document, s = d.createElement('script');
+						        
+						s.src = '//stikombali.disqus.com/embed.js';
+						        
+						s.setAttribute('data-timestamp', +new Date());
+						     (d.head || d.body).appendChild(s);
+						})();
+				</script>
+					<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+                <!-- /post-nav archive-nav -->
+            </div>
+            <!-- /content.left -->
+            {% include 'sidebar.html' %}
+            {% include 'footer.html' %}
+    </div>
+    <!-- /big-wrapper -->
+    {% else %}
+        <script>location.href='/blog'</script>
+    {% endif %}
+{% endblock %}

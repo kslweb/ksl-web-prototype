@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% block content %}
+        {% include 'header.html' %}
+        <div class="wrapper section-inner">
+            <div class="content left">
+                <div class="posts">
+                	{% for post in posts %}
+                	<div class="post-20 post type-post status-publish format-standard has-post-thumbnail sticky hentry category-lifestyle category-personal category-work tag-beverages tag-coffee tag-developers" id="post-20">
+                        <div class="post-header">
+                            <div class="featured-media"> <span class="sticky-post">{{ post.title }}</span>
+                                <a href="#"> 
+                                    {% if post.picture %}
+                                        <div id="custom_image"><img src="{{ post.picture.url }}" class="attachment-post-image wp-post-image" alt="Text"></div>
+                                    {% endif %}
+                                </a>
+                            </div>
+                            <!-- /featured-media -->
+                            <h2 class="post-title"><a href="{{ post.id }}" rel="bookmark">{{ post.title }}</a></h2>
+                            <div class="post-meta"> <span class="post-date">{{ post.created }}</span></div>
+                        </div>
+                        <!-- /post-header -->
+                        <div class="post-content">
+                            <p>{% autoescape off  %} {{ post.body | slice:":250" }} ... {{ linebreaks }} {% endautoescape %}</p>
+                            <p>Tag: 
+                            {% for tag in post.tags.all %}
+									<a href="/blog/tag/{{ tag }}">{{ tag }}</a>
+									{% if not forloop.last %}, {% endif %}
+							{% endfor %}</p>
+                            <p> <a href="{{ post.id }}" class="more-link">Continue reading</a>
+                            </p>
+                        </div>
+                        <!-- /post-content -->
+
+                        <div class="clear"></div>
+                    <!-- /post -->
+                    </div>
+                    {% endfor %}
+                </div>
+                <!-- /posts -->
+                <!-- /post-nav archive-nav -->
+            </div>
+            <!-- /content.left -->
+            {% include 'sidebar.html' %}
+            {% include 'footer.html' %}
+    </div>
+    <!-- /big-wrapper -->
+
+{% endblock %}

@@ -1,0 +1,52 @@
+{% block content %}
+{% load blog_tags %}
+<div class="sidebar right" role="complementary">
+                <div class="widget widget_search">
+                    <div class="widget-content">
+                        <form method="GET" class="searchform" action="/blog/search/">
+                            <input placeholder="Search ..." name="s" id="s" type="search">
+                            <input id="searchsubmit" value="Search" type="submit"> 
+                        </form>
+                    </div>
+                    <div class="clear"></div>
+                </div>
+                <div class="widget widget_recent_entries">
+                    <div class="widget-content">
+                        <h3 class="widget-title">Recent Posts</h3>
+                        <ul>
+                            {% latest_post as recent_post %}
+                            {% for id, title in recent_post.iteritems|slice:":2" %}
+                                <li><a href="/blog/{{ id }}">{{ title }}</a></li>
+                            {% endfor %}  
+                        </ul>
+                    </div>
+                    <div class="clear"></div>
+                </div>
+                <div class="widget widget_text">
+                    <div class="widget-content">
+                        <h3 class="widget-title">GitHub Account</h3>
+                        <div class="textwidget">
+                            <div data-theme="medium" data-height="" data-width="300" data-github="dfcictf" class="github-card"></div>
+                            <script src="//cdn.jsdelivr.net/github-cards/latest/widget.js"></script>
+                        </div>
+                    </div>
+                    <div class="clear"></div>
+                </div>
+                <div class="widget widget_tag_cloud">
+                    <div class="widget-content">
+                        <h3 class="widget-title">Tags</h3>
+                        <div class="tagcloud">
+                            {% tags as post_tag %}
+                                {% for tag in post_tag %}
+                                    <a href="/blog/tag/{{ tag }}" style="font-size: 8pt;">{{ tag }}</a>
+                                {% endfor %}
+                        </div>
+                    </div>
+                    <div class="clear"></div>
+                </div>
+            </div>
+            <!-- /sidebar -->
+            <div class="clear"></div>
+        </div>
+        <!-- /wrapper -->
+{% endblock %}
